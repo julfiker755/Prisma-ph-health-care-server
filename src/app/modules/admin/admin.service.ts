@@ -1,13 +1,12 @@
 import { Admin, Prisma, PrismaClient, userStatus } from "@prisma/client"
 import { paginationHelper } from "../../../helpers/paginationHelpers"
+import { IAdminFilterRequest, IPaginationOptions } from "./admin.interface"
 
 
 const prisma = new PrismaClient()
 
 
-
-
-const getAllBD = async (filters: any, options: any) => {
+const getAllBD = async (filters:IAdminFilterRequest, options:IPaginationOptions) => {
   const { search, ...filderData } = filters
   const { page, skip, limit, sortBy, sortOrder } = paginationHelper.calculatePagination(options)
   const addCondition: Prisma.AdminWhereInput[] = []
@@ -51,7 +50,7 @@ const getAllBD = async (filters: any, options: any) => {
     addCondition.push({
       AND: Object.keys(filderData).map((key) => ({
         [key]: {
-          equals: filderData[key]
+          equals: (filderData as any)[key]
         }
       }))
     })
@@ -102,6 +101,8 @@ const getSingleIdBD = async (id: string):Promise<Admin | null> => {
   })
   return result
 }
+
+
 
 
 const getSingleUpdateBD = async (id: string, data: Partial<Admin>):Promise<Admin> => {
