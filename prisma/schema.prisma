@@ -18,9 +18,11 @@ model User {
   email              String     @unique
   password           String
   role               userRole
-  needPasswordChange Boolean @default(true)
+  needPasswordChange Boolean    @default(true)
   status             userStatus @default(ACTIVE)
   admin              Admin?
+  doctor             Doctor?
+  patient            Patient?
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
 
@@ -46,10 +48,52 @@ model Admin {
   email         String   @unique
   profilePhoto  String?
   contactNumber String
-  isDeleted     Boolean @default(false)
+  isDeleted     Boolean  @default(false)
   user          User     @relation(fields: [email], references: [email])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
   @@map("admins")
+}
+
+model Doctor {
+  id                  String   @id @default(uuid())
+  name                String
+  email               String   @unique
+  profilePhoto        String?
+  contactNumber       String
+  address             String
+  registrationNumber  String
+  experience          Int      @default(0)
+  gender              Gender
+  appointmentFee      Int
+  qualification       String
+  currentWorkingPlace String
+  designaton          String
+  isDeleted           Boolean  @default(false)
+  user                User     @relation(fields: [email], references: [email])
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("doctors")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Patient {
+  id            String   @id @unique @default(uuid())
+  email         String   @unique
+  name          String
+  profilePhoto  String?
+  contactNumber String?
+  address       String?
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(references: [email], fields: [email])
+
+  @@map("patients")
 }
