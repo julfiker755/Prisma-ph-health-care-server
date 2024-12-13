@@ -13,6 +13,7 @@ router.patch("/:id/status",auth(userRole.ADMIN,userRole.SUPER_ADMIN),userControl
 router.get("/me",auth(userRole.ADMIN,userRole.SUPER_ADMIN,userRole.DOCTOR,userRole.PATIENT),userController.getMyProfile)
 
 
+
 router.post("/create-admim",auth(userRole.SUPER_ADMIN,userRole.ADMIN),
 fileUploader.upload.single("file"),
  (req:Request,res:Response,next:NextFunction)=>{

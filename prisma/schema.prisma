@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -20,26 +14,13 @@ model User {
   role               userRole
   needPasswordChange Boolean    @default(true)
   status             userStatus @default(ACTIVE)
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
   admin              Admin?
   doctor             Doctor?
   patient            Patient?
-  createdAt          DateTime   @default(now())
-  updatedAt          DateTime   @updatedAt
 
   @@map("users")
-}
-
-enum userRole {
-  SUPER_ADMIN
-  ADMIN
-  DOCTOR
-  PATIENT
-}
-
-enum userStatus {
-  ACTIVE
-  BLOCKED
-  DELETED
 }
 
 model Admin {
@@ -49,9 +30,9 @@ model Admin {
   profilePhoto  String?
   contactNumber String
   isDeleted     Boolean  @default(false)
-  user          User     @relation(fields: [email], references: [email])
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [email], references: [email])
 
   @@map("admins")
 }
@@ -70,19 +51,14 @@ model Doctor {
   qualification       String
   currentWorkingPlace String
   designaton          String
-  averageRating       Float               @default(0.0)
   isDeleted           Boolean             @default(false)
-  user                User                @relation(fields: [email], references: [email])
-  doctorSpecialties   DoctorSpecialties[]
   createdAt           DateTime            @default(now())
   updatedAt           DateTime            @updatedAt
+  averageRating       Float               @default(0.0)
+  user                User                @relation(fields: [email], references: [email])
+  doctorSpecialties   DoctorSpecialties[]
 
   @@map("doctors")
-}
-
-enum Gender {
-  MALE
-  FEMALE
 }
 
 model Patient {
@@ -95,7 +71,7 @@ model Patient {
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  user          User     @relation(references: [email], fields: [email])
+  user          User     @relation(fields: [email], references: [email])
 
   @@map("patients")
 }
@@ -111,10 +87,28 @@ model Specialties {
 
 model DoctorSpecialties {
   specialitiesId String
-  specialties    Specialties @relation(fields: [specialitiesId], references: [id])
   doctorId       String
   doctor         Doctor      @relation(fields: [doctorId], references: [id])
+  specialties    Specialties @relation(fields: [specialitiesId], references: [id])
 
   @@id([specialitiesId, doctorId])
   @@map("doctorspecialties")
+}
+
+enum userRole {
+  SUPER_ADMIN
+  ADMIN
+  DOCTOR
+  PATIENT
+}
+
+enum userStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum Gender {
+  MALE
+  FEMALE
 }

@@ -14,10 +14,11 @@ const prisma = new PrismaClient();
 const insertIntoDB =async(req:any)=>{
     const file=req.file
 
+
     if(file){
         const uploadToCloudinaryItems=await fileUploader.uploadToCloudinary(file)
         req.body.icon=uploadToCloudinaryItems?.secure_url
-        console.log(req.body)
+        console.log(req?.body)
     }
     const result=await prisma.specialties.create({
         data:req.body
