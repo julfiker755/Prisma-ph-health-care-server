@@ -14,7 +14,8 @@ router.get("/me",auth(userRole.ADMIN,userRole.SUPER_ADMIN,userRole.DOCTOR,userRo
 
 
 
-router.post("/create-admim",auth(userRole.SUPER_ADMIN,userRole.ADMIN),
+router.post("/create-admim",
+auth(userRole.SUPER_ADMIN,userRole.ADMIN),
 fileUploader.upload.single("file"),
  (req:Request,res:Response,next:NextFunction)=>{
     req.body=userValidation.creatAdmin.parse(JSON.parse(req.body.data))
@@ -44,9 +45,9 @@ fileUploader.upload.single("file"),
 
 
 router.patch("/update-my-profile",
+auth(userRole.SUPER_ADMIN,userRole.PATIENT,userRole.DOCTOR,userRole.ADMIN),
 fileUploader.upload.single("file"),
  (req:Request,res:Response,next:NextFunction)=>{
-   console.log(req.body)
     req.body=JSON.parse(req.body.data)
     return userController.updateMyProfile(req,res,next)
  }

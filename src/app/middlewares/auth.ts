@@ -16,7 +16,7 @@ const auth=(...roles:string[])=>{
             req.user=varifyToken
             
             if(roles?.length && !roles.includes(varifyToken.role)){
-                throw new ApiError(httpStatus.FORBIDDEN,"Forbitdden message")
+                throw new ApiError(httpStatus.FORBIDDEN,"Forbitdden message for role")
             }
             next()
            

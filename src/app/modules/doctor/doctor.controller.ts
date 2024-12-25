@@ -17,6 +17,16 @@ const pink=<T,K extends keyof T>(obj:T,keys:K[])=>{
 }
 
 
+const createDoctorBD=catchAsync(async(req:Request,res:Response)=>{
+    const result= await DoctorService.createIntoBD(req)
+    sendResponse(res,{
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"Doctor Create successfull",
+      data:result
+    })
+ })
+
 
 // get doctors
 const getIntoBD=catchAsync(async(req:Request,res:Response)=>{
@@ -34,6 +44,8 @@ const getIntoBD=catchAsync(async(req:Request,res:Response)=>{
 
 
 
+
+
 // doctors update one by one
 const updateIntoBD=catchAsync(async(req:Request,res:Response)=>{
     const {id}=req.params
@@ -48,6 +60,7 @@ const updateIntoBD=catchAsync(async(req:Request,res:Response)=>{
 })
 
 export const DoctorController={
+    createDoctorBD,
     updateIntoBD,
     getIntoBD
 }

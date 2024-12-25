@@ -10,6 +10,7 @@ CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE');
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" "userRole" NOT NULL,
@@ -53,6 +54,7 @@ CREATE TABLE "doctors" (
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "averageRating" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
 
     CONSTRAINT "doctors_pkey" PRIMARY KEY ("id")
 );
@@ -117,7 +119,7 @@ ALTER TABLE "doctors" ADD CONSTRAINT "doctors_email_fkey" FOREIGN KEY ("email") 
 ALTER TABLE "patients" ADD CONSTRAINT "patients_email_fkey" FOREIGN KEY ("email") REFERENCES "users"("email") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "doctorspecialties" ADD CONSTRAINT "doctorspecialties_specialitiesId_fkey" FOREIGN KEY ("specialitiesId") REFERENCES "specialties"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "doctorspecialties" ADD CONSTRAINT "doctorspecialties_doctorId_fkey" FOREIGN KEY ("doctorId") REFERENCES "doctors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "doctorspecialties" ADD CONSTRAINT "doctorspecialties_doctorId_fkey" FOREIGN KEY ("doctorId") REFERENCES "doctors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "doctorspecialties" ADD CONSTRAINT "doctorspecialties_specialitiesId_fkey" FOREIGN KEY ("specialitiesId") REFERENCES "specialties"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

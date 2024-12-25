@@ -1,11 +1,37 @@
-import {Prisma, PrismaClient} from "@prisma/client"
+import {Prisma, PrismaClient, userRole} from "@prisma/client"
 import { paginationHelper } from "../../../helpers/paginationHelpers";
+import bcrypt from "bcrypt";
 
 
 
 const prisma = new PrismaClient();
 
 
+
+const createIntoBD=async(req:any)=>{
+  const hashPassword = bcrypt.hashSync(req.body.password, 10);
+    
+    const userData = {
+        email: req.body.doctor.email,
+        password:hashPassword,
+        role: userRole.DOCTOR
+    }
+
+   
+
+const result=await prisma.$transaction(async (transactionClient) => {
+    await transactionClient.user.create({
+        data:userData
+    })
+
+    const createDoctorData=await transactionClient.doctor.create({
+        data:req.body.doctor
+    })
+    return createDoctorData
+})
+
+    return result
+}
 
 const getIntoBD = async (filters:any,options:any)=> {
     const { limit, page, skip } = paginationHelper.calculatePagination(options);
@@ -159,6 +185,7 @@ const getIntoBD = async (filters:any,options:any)=> {
 
 
   export const DoctorService={
+        createIntoBD,
         updateIntoBD ,
         getIntoBD
   }

@@ -13,7 +13,7 @@ router.get("/all",specialtiesController.getIntoDB)
 router.delete("/:id",specialtiesController.DeleteIntoDB)
 
 router.post("/",
-   // auth(userRole.SUPER_ADMIN,userRole.ADMIN,userRole.DOCTOR),
+   auth(userRole.SUPER_ADMIN,userRole.ADMIN,userRole.DOCTOR),
     fileUploader.upload.single("file"),
  (req:Request,res:Response,next:NextFunction)=>{
     req.body=specialtiesValidation.specialtiesShema.parse(JSON.parse(req.body.data))

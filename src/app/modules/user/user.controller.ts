@@ -17,39 +17,8 @@ return filnalObj
 }
 
 
-const createAdmin=catchAsync(async(req:Request,res:Response)=>{
-    const result= await userService.createAdmin(req)
-    sendResponse(res,{
-      statusCode:httpStatus.OK,
-      success:true,
-      message:"Admin user Create successfull",
-      data:result
-    })
- })
-
-
-const createDoctor=catchAsync(async(req:Request,res:Response)=>{
-    const result= await userService.createDoctor(req)
-    sendResponse(res,{
-      statusCode:httpStatus.OK,
-      success:true,
-      message:"Doctor Create successfull",
-      data:result
-    })
- })
-
-const createPatient=catchAsync(async(req:Request,res:Response)=>{
-    const result= await userService.createPatient(req)
-    sendResponse(res,{
-      statusCode:httpStatus.OK,
-      success:true,
-      message:"Patient Create successfull",
-      data:result
-    })
- })
-
 // getAlBD
- const getAllBD=catchAsync(async(req,res)=>{
+const getAllBD=catchAsync(async(req,res)=>{
   const filters=pink(req.query,["email","role","status","search"])
   const options=pink(req.query,["page","limit","sortBy","sortOrder"])
 
@@ -62,6 +31,43 @@ const createPatient=catchAsync(async(req:Request,res:Response)=>{
      data:result.data
   })
 })
+
+
+
+
+const createAdmin=catchAsync(async(req:Request,res:Response)=>{
+    const result= await userService.createAdmin(req)
+    sendResponse(res,{
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"Admin user Create successfull",
+      data:result
+    })
+ })
+
+
+//  create-doctor
+const createDoctor=catchAsync(async(req:Request,res:Response)=>{
+    const result= await userService.createDoctor(req)
+    sendResponse(res,{
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"Doctor Create successfull",
+      data:result
+    })
+ })
+
+
+const createPatient=catchAsync(async(req:Request,res:Response)=>{
+    const result= await userService.createPatient(req)
+    sendResponse(res,{
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"Patient Create successfull",
+      data:result
+    })
+ })
+
 
 // changeStatus
 const changeProfileStatus=catchAsync(async(req:Request,res:Response)=>{
@@ -87,10 +93,10 @@ const getMyProfile=catchAsync(async(req:Request & {user?:IAuthUser},res:Response
   })
 })
 
-
 // update -my-profile
 const updateMyProfile=catchAsync(async(req:Request & {user?:IAuthUser},res:Response)=>{
   const user=req.user
+  console.log(req.file)
   const result= await userService.updateMyProfile(user as IAuthUser,req)
   sendResponse(res,{
     statusCode:httpStatus.OK,
