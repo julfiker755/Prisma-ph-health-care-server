@@ -21,3 +21,4 @@ router.post("/",
  })
 
 export const SpecialtiesRoutes = router
+

@@ -17,30 +17,42 @@ const pink=<T,K extends keyof T>(obj:T,keys:K[])=>{
 }
 
 
+// get doctors
+const getIntoBD=catchAsync(async(req:Request,res:Response)=>{
+    const filters=pink(req.query,['name','email','contactNumber','address','qualification','designation',"specialties"])
+    const options=pink(req.query,["page","limit","sortBy","sortOrder"])
+    const result=await DoctorService.getIntoBD(filters,options)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"Doctor Data Get successfully!",
+        data:result
+    })
+})
+
+
 const createDoctorBD=catchAsync(async(req:Request,res:Response)=>{
     const result= await DoctorService.createIntoBD(req)
     sendResponse(res,{
       statusCode:httpStatus.OK,
       success:true,
-      message:"Doctor Create successfull",
+      message:"doctor Create successfull",
       data:result
     })
  })
 
 
-// get doctors
-const getIntoBD=catchAsync(async(req:Request,res:Response)=>{
-    const filters=pink(req.query,['name','email','contactNumber','address','qualification','designation'])
-    const options=pink(req.query,["page","limit","sortBy","sortOrder"])
-    const result=await DoctorService.getIntoBD(filters,options)
-
+const doctorDeleteBD=catchAsync(async(req:Request,res:Response)=>{
+    const {id}=req.params
+    const result= await DoctorService.doctorDelete(id)
     sendResponse(res,{
-        statusCode:httpStatus.OK,
-        success:true,
-        message:"update in successfully!",
-        data:result
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"doctor delete successfull",
+      data:result
     })
-})
+ })
+
 
 
 
@@ -54,7 +66,7 @@ const updateIntoBD=catchAsync(async(req:Request,res:Response)=>{
     sendResponse(res,{
         statusCode:httpStatus.OK,
         success:true,
-        message:"update in successfully!",
+        message:"doctor update successfully!",
         data:result
     })
 })
@@ -62,5 +74,6 @@ const updateIntoBD=catchAsync(async(req:Request,res:Response)=>{
 export const DoctorController={
     createDoctorBD,
     updateIntoBD,
-    getIntoBD
+    getIntoBD,
+    doctorDeleteBD
 }
