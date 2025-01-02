@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 
 
 
+
 const prisma = new PrismaClient();
 
 const getIntoBD = async (filters:any,options:any)=> {
@@ -118,32 +119,93 @@ const getSingleBD=async(id:string)=>{
 }
 
 const updateIntoBD=async(id:string,req:any)=>{
-  const result=await prisma.patient.update({
+  const {PatientHealthData,medicalReport,...patientData}=req.body
+   
+  const patientInfo=await prisma.patient.findUniqueOrThrow({
+    where:{
+      id
+    }
+  })
+
+  const result=await prisma.$transaction(async(transactionClient)=>{
+    // update patient data
+   await prisma.patient.update({
     where:{
       id
     },
-    data:req.body,
+    data:patientData,
     include:{
       PatientHealthData:true,
       medicalReport:true
     }
   })
+  // create or update patient health data
+  if(patientData){
+    const healthData=await transactionClient.patientHealthData.upsert({
+      where:{
+        patientId:patientInfo?.id
+      },
+      update:PatientHealthData,
+      create:{...PatientHealthData,patientId:patientInfo.id}
+    })
+
+  }
+  if(medicalReport){
+    await transactionClient.medicalReport.create({
+      data:{...medicalReport,patientId:patientInfo.id}
+    })
+  }
+  const responseData=await prisma.patient.findUnique({
+    where:{
+      id:patientInfo.id
+    },
+    include:{
+      PatientHealthData:true,
+      medicalReport:true
+    }
+  })
+  return responseData
+  })
   return result
 }
 
   // delete for doctors
-  const doctorDelete=async(id:string)=>{
-     const result=await prisma.doctor.delete({
+  const doctorDeletDB=async(id:string)=>{
+    const result=await prisma.$transaction(async(transactionClient)=>{
+      // medicalReport
+      await transactionClient.medicalReport.deleteMany({
+        where:{
+          patientId:id
+        }
+      })
+
+    // patientHelathData
+    await transactionClient.patientHealthData.delete({
       where:{
-        id
+        patientId:id
       }
-     })
-     return result
+    })
+  // patient data
+ const deletePaitent= await transactionClient.patient.delete({
+    where:{
+      id
+    }
+  })
+
+  await transactionClient.user.delete({
+    where:{
+      email:deletePaitent.email
+    }
+  })
+    })
+
+    return result
   }
 
   export const patientService={
     getIntoBD,
     createPatientDB,
     getSingleBD,
-    updateIntoBD
+    updateIntoBD,
+    doctorDeletDB
   }

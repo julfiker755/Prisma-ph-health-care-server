@@ -65,9 +65,22 @@ const updateIntoBD=catchAsync(async(req:Request,res:Response)=>{
  })
 
 
+const deleteIntoBD=catchAsync(async(req:Request,res:Response)=>{
+   const {id}=req.params
+    const result= await patientService.doctorDeletDB(id)
+    sendResponse(res,{
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"Patient delete successfull",
+      data:result
+    })
+ })
+
+
 export const patientController={
     getIntoBD,
     createPatient,
     getSingleBD,
-    updateIntoBD
+    updateIntoBD,
+    deleteIntoBD
 }

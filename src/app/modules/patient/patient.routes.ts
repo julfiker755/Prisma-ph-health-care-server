@@ -20,7 +20,7 @@ fileUploader.upload.single("file"),
 )
 
 router.patch("/:id",patientController.updateIntoBD)
-// router.delete("/:id",DoctorController.doctorDeleteBD)
+router.delete("/:id",patientController.deleteIntoBD)
 
 
 
