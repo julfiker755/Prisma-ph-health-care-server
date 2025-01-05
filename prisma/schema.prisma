@@ -57,6 +57,7 @@ model Doctor {
   averageRating       Float               @default(0.0)
   user                User                @relation(fields: [email], references: [email])
   doctorSpecialties   DoctorSpecialties[]
+  doctorSchedule      DoctorSchedule[]
 
   @@map("doctors")
 }
@@ -125,7 +126,7 @@ model PatientHealthData {
 
 model MedicalReport {
   id         String   @id @default(uuid())
-  patientId  String 
+  patientId  String
   patient    Patient  @relation(fields: [patientId], references: [id])
   reportName String
   reportLink String
@@ -133,6 +134,29 @@ model MedicalReport {
   updatedAt  DateTime @updatedAt
 
   @@map("medical_reports")
+}
+
+model Schedule {
+  id             String           @id @default(uuid())
+  startDateTime      DateTime
+  endDateTime        DateTime
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  doctorSchedule DoctorSchedule[]
+
+  @@map("schedules")
+}
+
+model DoctorSchedule {
+  doctorId      String
+  doctor        Doctor   @relation(fields: [doctorId], references: [id])
+  scheduleId    String
+  schedule      Schedule @relation(fields: [scheduleId], references: [id])
+  isBooked      Boolean
+  appointmentId String?
+
+  @@id([doctorId, scheduleId])
+  @@map("doctor_schedules")
 }
 
 enum userRole {
