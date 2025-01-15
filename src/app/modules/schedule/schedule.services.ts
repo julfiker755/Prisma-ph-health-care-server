@@ -80,6 +80,26 @@ const  getAllFromDB= async (options:any,filters:any,user:any)=> {
    };
  };
 
+
+ const getSingleget=async(id:any)=>{
+    const result=await prisma.schedule.findUnique({
+      where:{
+         id:id
+      }
+    })
+    return result
+ }
+
+ const deleteintoBD=async(id:any)=>{
+    const result=await prisma.schedule.delete({
+      where:{
+         id:id
+      }
+    })
+    return result
+ }
+
+
 const insertIntoDB=async(payload:ISchedule):Promise<Schedule[]>=>{
     const {startDate,endDate,startTime,endTime}=payload
 
@@ -147,5 +167,7 @@ return schedules
 
 export const scheduleServices={
     getAllFromDB,
-    insertIntoDB
+    insertIntoDB,
+    getSingleget,
+    deleteintoBD
 }

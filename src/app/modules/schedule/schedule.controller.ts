@@ -29,6 +29,27 @@ const getAllFromDB=catchAsync(async(req:Request & {user?:any},res:Response)=>{
         data:result
     })
 })
+const getIntoDB=catchAsync(async(req:Request,res:Response)=>{
+    const {id}=req.params
+    const result=await scheduleServices.getSingleget(id)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"Schedule Single get successfully!",
+        data:result
+    })
+})
+
+const deleteIntoDB=catchAsync(async(req:Request,res:Response)=>{
+    const {id}=req.params
+    const result=await scheduleServices.deleteintoBD(id)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"Schedule delete successfully!",
+        data:result
+    })
+})
 const insertIntoDB=catchAsync(async(req:Request,res:Response)=>{
     const result=await scheduleServices.insertIntoDB(req.body)
     sendResponse(res,{
@@ -42,5 +63,7 @@ const insertIntoDB=catchAsync(async(req:Request,res:Response)=>{
 
 export const scheduleController={
     getAllFromDB,
-    insertIntoDB
+    insertIntoDB,
+    getIntoDB,
+    deleteIntoDB
 }
