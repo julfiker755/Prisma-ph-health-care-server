@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\errors\\.733dc54f6ff68d604861e8a6f0fb7a19962a4c29-audit.json",
+    "files": [
+        {
+            "date": 1737002273451,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\errors\\16-01-2025-10.log",
+            "hash": "337c92b00ddfd7f0cb33a35d3ab37f882d6505e9e7b0c339ddbd5e4a69816904"
+        }
+    ],
+    "hashType": "sha256"
+}

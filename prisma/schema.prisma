@@ -58,6 +58,7 @@ model Doctor {
   user                User                @relation(fields: [email], references: [email])
   doctorSpecialties   DoctorSpecialties[]
   doctorSchedule      DoctorSchedule[]
+  appointment         Appointment[]
 
   @@map("doctors")
 }
@@ -75,6 +76,7 @@ model Patient {
   user              User               @relation(fields: [email], references: [email])
   PatientHealthData PatientHealthData?
   medicalReport     MedicalReport[]
+  appointment       Appointment[]
 
   @@map("patients")
 }
@@ -138,11 +140,12 @@ model MedicalReport {
 
 model Schedule {
   id             String           @id @default(uuid())
-  startDateTime      DateTime
-  endDateTime        DateTime
+  startDateTime  DateTime
+  endDateTime    DateTime
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
   doctorSchedule DoctorSchedule[]
+  appointment    Appointment?
 
   @@map("schedules")
 }
@@ -152,11 +155,39 @@ model DoctorSchedule {
   doctor        Doctor   @relation(fields: [doctorId], references: [id])
   scheduleId    String
   schedule      Schedule @relation(fields: [scheduleId], references: [id])
-  isBooked      Boolean @default(false)
+  isBooked      Boolean  @default(false)
   appointmentId String?
 
   @@id([doctorId, scheduleId])
   @@map("doctor_schedules")
+}
+
+model Appointment {
+  id         String  @id @default(uuid())
+  patientId  String
+  patient    Patient @relation(fields: [patientId], references: [id])
+  doctorId   String
+  doctor     Doctor  @relation(fields: [doctorId], references: [id])
+  scheduleId String  @unique
+  schedule      Schedule          @relation(fields: [scheduleId], references: [id])
+  status        AppointmentStatus @default(SCHEDULED)
+  paymentStatus PaymentStatus @default(UNPAID)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@map("appointment")
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  INPROGRESS
+  COMPLETED
+  CANCELED
 }
 
 enum userRole {
