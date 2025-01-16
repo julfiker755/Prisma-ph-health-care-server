@@ -45,6 +45,21 @@ const deleteFormDB=catchAsync(async(req:Request & {user?:any},res:Response)=>{
 })
 
 
+const myScheduleBD=catchAsync(async(req:Request & {user?:any},res:Response)=>{
+    const options=pink(req.query,["page","limit","sortBy","sortOrder"])
+    const filters=pink(req.query,["startDate","endDate","isBooked"])
+     const user=req.user
+    const result=await doctorScheduleServices.getMySchedule(options,filters,user)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"My Schedule get successfully!",
+        data:result
+    })
+})
+
+
+
 const getIntoDB=catchAsync(async(req:Request & {user?:any},res:Response)=>{
     const options=pink(req.query,["page","limit","sortBy","sortOrder"])
     const filters=pink(req.query,["startDate","endDate","isBooked"])
@@ -61,5 +76,6 @@ const getIntoDB=catchAsync(async(req:Request & {user?:any},res:Response)=>{
 export const doctorScheduleController={
     insertIntoDB,
     getIntoDB,
-    deleteFormDB
+    deleteFormDB,
+    myScheduleBD
 }

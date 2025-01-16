@@ -14,7 +14,15 @@ export default {
         reset_pass_token:process.env.RESET_PASS_TOKEN,
         reset_pass_expires_in:process.env.RESET_PASS_EXPIRES_IN
      },
-     reset_pass_link:process.env.RESET_PASS_LINK
+     reset_pass_link:process.env.RESET_PASS_LINK,
+     ssl:{
+       storeId:process.env.STORE_ID,
+       storePass:process.env.STORE_PASSWORD,
+       successUrl:process.env.SUCCESS_URL,
+       cancelUrl:process.env.CANCEL_URL,
+       failUrl:process.env.FAIL_URL,
+       validationUrl:process.env.SSL_VALIDATION_API
+     }
 }
 
 
