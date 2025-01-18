@@ -11,6 +11,7 @@ import { AppoinmentRoutes } from "../modules/appointment/appointment.routes";
 import { paymentRoutes } from "../modules/payment/payment.routes";
 import { prescriptionRoutes } from "../modules/prescription/prescripation.routes";
 import { reviewRoutes } from "../modules/review/review.routes";
+import { mataRoutes } from "../modules/mata/mata.routes";
 
 
 
@@ -53,6 +54,9 @@ const moduleRoutes=[
     },{
         path:"/review",
         route:reviewRoutes
+    },{
+        path:'/mata',
+        route:mataRoutes
     }
 ]
 
