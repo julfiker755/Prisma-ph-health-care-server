@@ -40,9 +40,22 @@ const MyAppoinment=catchAsync(async(req:Request & {user?:any},res:Response)=>{
     })
 })
 
+const changeAppoinmentStatus=catchAsync(async(req:Request &{user?:any},res:Response)=>{
+    const {id}=req.params
+    const {status}=req.body
+    const user=req.user
+    const result=await appoinmentService.changeAppoinmentStatus(id,status,user)
+    sendResponse(res,{
+        statusCode:httpStatus.OK,
+        success:true,
+        message:"Appointment Status change successfully!",
+        data:result
+    })
+})
 
 export const AppointmentController={
     createAppoinment,
-    MyAppoinment
+    changeAppoinmentStatus,
+    MyAppoinment,
 }
 

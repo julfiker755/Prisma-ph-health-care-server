@@ -5,6 +5,8 @@ import httpStatus from 'http-status'
 import globalErrorHander from './app/middlewares/globalErrorHander'
 const app:Application = express()
 import cookieParser from 'cookie-parser'
+import { appoinmentService } from './app/modules/appointment/appointment.service'
+import cron from 'node-cron'
 
 app.use(cors())
 app.use(express.json())
@@ -20,8 +22,18 @@ app.get("/",(req:Request,res:Response)=>{
 })
 
 app.use("/api/v1",router)
-
 app.use(globalErrorHander)
+
+
+
+// appointent cancel data delete
+cron.schedule('* * * * *', () => {
+  try{
+    appoinmentService.cancelUnpailappointment()
+  }catch(err){
+    console.log(err)
+  }
+});
 
 app.use((req:Request,res:Response,next:NextFunction)=>{
   res.status(httpStatus.NOT_FOUND).json({

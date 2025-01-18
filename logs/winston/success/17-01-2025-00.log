@@ -16,3 +16,9 @@
   label: 'Info',
   timestamp: '2025-01-16T18:46:53.091Z'
 }
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-16T18:46:55.555Z'
+}
