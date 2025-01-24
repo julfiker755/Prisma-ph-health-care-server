@@ -1,4 +1,4 @@
-import {Doctor, Prisma, PrismaClient, userRole} from "@prisma/client"
+import {Doctor, Prisma, PrismaClient, userRole, userStatus} from "@prisma/client"
 import { paginationHelper } from "../../../helpers/paginationHelpers";
 import { fileUploader } from "../../../helpers/fileUploader";
 import bcrypt from "bcrypt";
@@ -13,10 +13,11 @@ const getIntoBD = async (filters:any,options:any)=> {
 
   const andConditions: Prisma.DoctorWhereInput[] = [];
 
+  console.log(search)
 
   if (search) {
     andConditions.push({
-      OR:['name','email','contactNumber','address','qualification','designation'].map(field => ({
+      OR:['name','email','contactNumber','address','qualification','designaton'].map(field => ({
         [field]: {
           contains:search,
           mode: 'insensitive',
@@ -202,9 +203,43 @@ const result=await prisma.$transaction(async (transactionClient) => {
      return result
   }
 
+
+// in of the soft delete
+  const doctorSoftDelete=async(id:string)=>{
+    await prisma.doctor.findUniqueOrThrow({
+      where:{
+        id:id,
+        isDeleted:false
+      }
+    })
+  
+    const result=await prisma.$transaction(async(transactionClient)=>{
+      const adminDeleteData=await transactionClient.doctor.update({
+        where:{
+          id
+        },
+        data:{
+          isDeleted:true
+        }
+      })
+  
+      const userDeleteData=await transactionClient.user.update({
+        where:{
+          email:adminDeleteData.email
+        },
+        data:{
+          status:userStatus.DELETED
+        }
+      })
+      return userDeleteData
+    })
+    return result
+  }
+
   export const DoctorService={
         createIntoBD,
         updateIntoBD ,
         getIntoBD,
-        doctorDelete
+        doctorDelete,
+        doctorSoftDelete
   }

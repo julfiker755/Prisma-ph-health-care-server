@@ -8,7 +8,7 @@ import { IAuthUser } from "../../interface/comman";
 
 const pink=<T,K extends keyof T>(obj:T,keys:K[])=>{
   const filnalObj:Partial<T> ={}
-for (const key of keys){
+for(const key of keys){
    if(obj && Object.hasOwnProperty.call(obj,key)){
       filnalObj[key]=obj[key]
    }

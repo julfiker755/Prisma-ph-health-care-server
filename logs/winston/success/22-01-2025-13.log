@@ -2,11 +2,11 @@
   message: 'Server is running 5000',
   level: 'info',
   label: 'Info',
-  timestamp: '2025-01-18T11:47:42.874Z'
+  timestamp: '2025-01-22T07:10:40.431Z'
 }
 {
   message: 'Server is running 5000',
   level: 'info',
   label: 'Info',
-  timestamp: '2025-01-18T11:48:51.102Z'
+  timestamp: '2025-01-22T07:22:23.101Z'
 }
