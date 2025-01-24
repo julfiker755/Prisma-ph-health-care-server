@@ -1,0 +1,80 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\.93681b7c25535cb9ed03422fa5cc00ecc0da07ab-audit.json",
+    "files": [
+        {
+            "date": 1737200862862,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\18-01-2025-17.log",
+            "hash": "554d335de1f8bea41ae50378f2c3b3ae435d1027f6e8a9ced3249581cbb4e096"
+        },
+        {
+            "date": 1737529840419,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\22-01-2025-13.log",
+            "hash": "42729326f69d6259746d7fcbfbccf167229b34fd4c9acdaf38af5f8721973d1d"
+        },
+        {
+            "date": 1737546387511,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\22-01-2025-17.log",
+            "hash": "4ab88fed44ba8aa731d476f419de826284f0b6379a8500cc4d2bd7cb87db1f4e"
+        },
+        {
+            "date": 1737550987488,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\22-01-2025-19.log",
+            "hash": "cd90c63adb3ad0ab58d48e2d4605957e53d29754ad77d06bd477038fd8658453"
+        },
+        {
+            "date": 1737569001236,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-00.log",
+            "hash": "0cff345d923de630df7c29963c77ca0a7073f0da217dc5a2781423f90f7846b3"
+        },
+        {
+            "date": 1737609684129,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-11.log",
+            "hash": "2d8305a61d2093ab4ebca0d4d5d554322f89fd51d8764952f72e37446a830322"
+        },
+        {
+            "date": 1737612084244,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-12.log",
+            "hash": "65b1515a97eac50c6937405e2b4cc367d5a0e20dce6345bb60fb21880925d344"
+        },
+        {
+            "date": 1737617575668,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-13.log",
+            "hash": "bb0dd3e02a762aa07e3544f1f0308ff83b3fe72615318cc0301d2676d1f9b23e"
+        },
+        {
+            "date": 1737629594771,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-16.log",
+            "hash": "9e757f36b9a938428554dcd4dd0156523e5f3f9d174a4e511dbc79ad3b178da2"
+        },
+        {
+            "date": 1737630314434,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-17.log",
+            "hash": "3cd6f7feb2e77075adff51564e9896eb01e94a243db9a71dbcc5fa7208ad70b6"
+        },
+        {
+            "date": 1737641650556,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\23-01-2025-20.log",
+            "hash": "fa7d0e55a66d5277f3960c9ad04532a6ca9b8c7bb29c9529a226e6d769371fb0"
+        },
+        {
+            "date": 1737657987062,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\24-01-2025-00.log",
+            "hash": "d1f426f5dfde1bca3547cfc2cb3c212a05285765634db07a178c1940dc11b4a5"
+        },
+        {
+            "date": 1737658917813,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\24-01-2025-01.log",
+            "hash": "e280ac44460dcff00d1d46d50e1f2a7f9031465016e9f8175b677c367a0b8e7d"
+        },
+        {
+            "date": 1737700922043,
+            "name": "C:\\Users\\Julfiker\\OneDrive\\Desktop\\all server\\ph-health-care-server\\logs\\winston\\success\\24-01-2025-12.log",
+            "hash": "21b952d2422d78e64a2ae1077a3e24c9d78ddee20b88937130ecada469e39d5c"
+        }
+    ],
+    "hashType": "sha256"
+}

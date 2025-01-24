@@ -29,6 +29,7 @@ const getAllFromDB=catchAsync(async(req:Request & {user?:any},res:Response)=>{
         data:result
     })
 })
+
 const getIntoDB=catchAsync(async(req:Request,res:Response)=>{
     const {id}=req.params
     const result=await scheduleServices.getSingleget(id)
@@ -55,7 +56,7 @@ const insertIntoDB=catchAsync(async(req:Request,res:Response)=>{
     sendResponse(res,{
         statusCode:httpStatus.OK,
         success:true,
-        message:"Schedule Create successfully!",
+        message:"Schedule s Create successfully!",
         data:result
     })
 })

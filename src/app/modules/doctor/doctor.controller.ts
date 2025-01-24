@@ -19,7 +19,7 @@ const pink=<T,K extends keyof T>(obj:T,keys:K[])=>{
 
 // get doctors
 const getIntoBD=catchAsync(async(req:Request,res:Response)=>{
-    const filters=pink(req.query,['name','email','contactNumber','address','qualification','designation',"specialties"])
+    const filters=pink(req.query,['search','name','email','contactNumber','address','qualification','designaton',"specialties"])
     const options=pink(req.query,["page","limit","sortBy","sortOrder"])
     const result=await DoctorService.getIntoBD(filters,options)
     sendResponse(res,{
@@ -54,6 +54,18 @@ const doctorDeleteBD=catchAsync(async(req:Request,res:Response)=>{
  })
 
 
+const doctorSoftDeleteBD=catchAsync(async(req:Request,res:Response)=>{
+    const {id}=req.params
+    const result= await DoctorService.doctorSoftDelete(id)
+    sendResponse(res,{
+      statusCode:httpStatus.OK,
+      success:true,
+      message:"doctor soft delete successfull",
+      data:result
+    })
+ })
+
+
 
 
 
@@ -75,5 +87,6 @@ export const DoctorController={
     createDoctorBD,
     updateIntoBD,
     getIntoBD,
-    doctorDeleteBD
+    doctorDeleteBD,
+    doctorSoftDeleteBD
 }

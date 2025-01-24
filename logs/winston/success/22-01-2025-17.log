@@ -1,0 +1,36 @@
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-22T11:46:27.526Z'
+}
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-22T11:47:04.025Z'
+}
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-22T11:48:52.129Z'
+}
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-22T11:50:20.101Z'
+}
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-22T11:51:25.797Z'
+}
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-22T11:51:33.966Z'
+}

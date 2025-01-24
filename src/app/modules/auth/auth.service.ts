@@ -54,11 +54,15 @@ config.jwt.refresh_token_expires_in as string
 
 
 const refreshToken=async(token:string)=>{
+    console.log(token)
     let decodedToken
     try{
-        decodedToken = jwtHelpers.varifyToken(token, 'julfiker')
+        decodedToken = jwtHelpers.varifyToken(token,
+        config.jwt.refresh_token_jwt_secret as string
+        )
         console.log(decodedToken)
     }catch(err){
+        console.log(err)
       throw new Error("You are not authorized")
     }
     const isUserExsis=await prisma.user.findUniqueOrThrow({

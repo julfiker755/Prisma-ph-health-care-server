@@ -1,0 +1,6 @@
+{
+  message: 'Server is running 5000',
+  level: 'info',
+  label: 'Info',
+  timestamp: '2025-01-23T14:14:10.573Z'
+}

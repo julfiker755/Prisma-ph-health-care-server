@@ -10,7 +10,7 @@ const convartDateTime=async(date:Date)=>{
     return new Date(date.getTime() + offset)
 }
 
-const insertIntoDB=async(payload:ISchedule):Promise<Schedule[]>=>{
+const insertIntoDB=async(payload:ISchedule)=>{
    const {startDate,endDate,startTime,endTime}=payload
 
     const currentDate=new Date(startDate)    

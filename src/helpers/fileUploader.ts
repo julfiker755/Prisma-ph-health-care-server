@@ -38,6 +38,7 @@ const storage = multer.diskStorage({
     })
 };
 
+
   export const fileUploader={
     upload,
     uploadToCloudinary

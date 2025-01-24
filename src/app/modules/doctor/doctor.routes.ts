@@ -21,6 +21,7 @@ fileUploader.upload.single("file"),
 
 router.patch("/:id",DoctorController.updateIntoBD)
 router.delete("/:id",DoctorController.doctorDeleteBD)
+router.delete("/soft/:id",DoctorController.doctorSoftDeleteBD)
 
 
 
